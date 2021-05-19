@@ -14,7 +14,7 @@ Zeraati, R., Shi, Y., Steinmetz, N. A., Gieselmann, M. A., Thiele, A., Moore, T.
 The basis of aABC algorithm in this package is adopted from a previous implementation (originally developed in Python 2):
 Robert C. Morehead and Alex Hagen. A Python package for Approximate Bayesian Computation (2014). https://github.com/rcmorehead/simpleabc. 
 
-Check the Jupyter Notebook Tutorials 1 and 2 to learn how to use abcTau for estimating timescales and performing Bayesian model comparison. Three example python scripts are also avaiable for running the package on a cluster. You can use the "check_expEstimates" function from the the "preprocessing" module to check the bias in timescales estimated from exponential fits on your data.
+Check the Jupyter Notebook Tutorials 1 and 2 to learn how to use abcTau for estimating timescales and performing Bayesian model comparison. Three example python scripts are also avaiable for running the package on a cluster with parallel processing. You can use the "check_expEstimates" function from the the "preprocessing" module to check the bias in timescales estimated from exponential fits on your data.
 
 
 ## Dependencies
