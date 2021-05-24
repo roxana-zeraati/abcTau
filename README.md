@@ -35,14 +35,14 @@ For the final version we will provide the "pip install" option for the package.
 The object oriented implementation of the package allows users to easily replace any function, including generative models, summary statistic computations, distance functions, etc., with their customized functions to better describe statistics of their data. You can send us your customized generative models to be added directly to the package and create a larger database of generative models available for different applications (contact: roxana.zeraati@uni-tuebingen.de)
 
 
-## List of available summary statistics computations (check "summary_stats.py" for details):
+### List of available summary statistics computations (check "summary_stats.py" for details):
 Ordered from fastest to slowest fitting:
 - comp_psd: computing the power spectral density
 - comp_ac_fft: computing autocorrelation using FFT to speed up (more biased for direct fitting) 
 - comp_cc: computing autocorrelation in the time domain (less biased for direct fitting)
 
 
-## List of available generative models (check "generative_models.py" for details):
+### List of available generative models (check "generative_models.py" for details):
 - oneTauOU: one-timescale OU process 
 - twoTauOU: two-timescale OU process 
 - oneTauOU_oscil: one-timescale OU process with an additive oscillation
@@ -56,6 +56,6 @@ Ordered from fastest to slowest fitting:
 - twoTauOU_gaussianSpikes_withDispersion: two-timescale spiking process with Gaussian distributed spike-counts
 
 
-## List of available distance functions (check "distance_functions.py" for details):
+### List of available distance functions (check "distance_functions.py" for details):
 - linear_distance
 - logarithmic_distance
