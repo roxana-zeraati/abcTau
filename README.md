@@ -31,7 +31,7 @@ sys.path.append('./abcTau')
 ```
 For the final version we will provide the "pip install" option for the package.
 
-## Developement
+## Development
 The object oriented implementation of the package allows users to easily replace any function, including generative models, summary statistic computations, distance functions, etc., with their customized functions to better describe statistics of their data. You can send us your customized generative models to be added directly to the package and create a larger database of generative models available for different applications (contact: roxana.zeraati@uni-tuebingen.de)
 
 
