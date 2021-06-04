@@ -6,6 +6,8 @@ The details of the method are explained in:
 Zeraati, R., Engel, T. A. & Levina, A. A flexible Bayesian framework for unbiased estimation of timescales. bioRxiv 2020.08.11.245944 (2021). https://www.biorxiv.org/content/10.1101/2020.08.11.245944v2  
 Please cite this reference when you use this package for a scientific publication.
 
+You can find Demos on how to use abcTau for estimating timescales and performing Bayesian model comparison in the  Jupyter Notebook Tutorials 1 and 2. The example data to test the package are available in "example_data" folder. The example outputs are available in "example_abc_results" and "example_modelComparison". Three example python scripts are also avaiable for running the package on a cluster with parallel processing. You can use the "check_expEstimates" function from the the "preprocessing" module to check the bias in timescales estimated from exponential fits on your data.
+
 
 For a recent application of this method see:   
 Zeraati, R., Shi, Y., Steinmetz, N. A., Gieselmann, M. A., Thiele, A., Moore, T., Levina, A. & Engel, T. A. Attentional modulation of intrinsic timescales in visual cortex and spatial networks. bioRxiv 2021.05.17.444537 (2021). https://www.biorxiv.org/content/10.1101/2021.05.17.444537v1
@@ -14,7 +16,11 @@ Zeraati, R., Shi, Y., Steinmetz, N. A., Gieselmann, M. A., Thiele, A., Moore, T.
 The basis of aABC algorithm in this package is adopted from a previous implementation (originally developed in Python 2):
 Robert C. Morehead and Alex Hagen. A Python package for Approximate Bayesian Computation (2014). https://github.com/rcmorehead/simpleabc. 
 
-Check the Jupyter Notebook Tutorials 1 and 2 to learn how to use abcTau for estimating timescales and performing Bayesian model comparison. Three example python scripts are also avaiable for running the package on a cluster with parallel processing. You can use the "check_expEstimates" function from the the "preprocessing" module to check the bias in timescales estimated from exponential fits on your data.
+
+## Operating system
+- macOs
+- Windows
+- Linux
 
 
 ## Dependencies
@@ -24,12 +30,14 @@ Check the Jupyter Notebook Tutorials 1 and 2 to learn how to use abcTau for esti
 
 
 ## Installation
-For the current version you need to add the package path manually:
+For the current version you need to clone this repository and add the package path manually to your Python script or Jupyter Notebook:
 ```
 import sys
 sys.path.append('./abcTau')
 ```
-For the final version we will provide the "pip install" option for the package.
+You can see the working examples in the Jupyter Notebook Tutorials 1 and 2. Typical time for installation is less 10 sec.
+For the final version of the package we will provide the "pip install" option.
+
 
 ## Development
 The object oriented implementation of the package allows users to easily replace any function, including generative models, summary statistic computations, distance functions, etc., with their customized functions to better describe statistics of their data. You can send us your customized generative models to be added directly to the package and create a larger database of generative models available for different applications (contact: research@roxanazeraati.org)
