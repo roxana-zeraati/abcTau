@@ -30,12 +30,16 @@ Robert C. Morehead and Alex Hagen. A Python package for Approximate Bayesian Com
 
 
 ## Installation
-For the current version you need to clone this repository and add the package path manually to your Python script or Jupyter Notebook:
+For the current version you need to clone this repository as
+```
+git clone git@github.com:roxana-zeraati/abcTau.git
+```
+and add the package path manually to your Python script or Jupyter Notebook:
 ```
 import sys
 sys.path.append('./abcTau')
 ```
-You can see the working examples in the Jupyter Notebook Tutorials 1 and 2. Typical time for installation is less 10 sec.
+You can see the working examples in the Jupyter Notebook Tutorials 1 and 2. Typical time for installation (i.e. cloning the repository) is less 10 sec.
 For the final version of the package we will provide the "pip install" option.
 
 
