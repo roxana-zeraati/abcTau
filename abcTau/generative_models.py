@@ -177,6 +177,68 @@ def oneTauOU_oscil(theta, deltaT, binSize, T, numTrials, data_mean, data_var):
     return syn_data, numBinData
 
 
+def oneTauOU_twooscil(theta, deltaT, binSize, T, numTrials, data_mean, data_var):
+    """Generate a one-timescale OU process with two additive oscillation.
+    
+    Parameters
+    -----------
+    theta : 1d array
+        [timescale of OU, frequency of oscillation1, frequency of oscillation2, coefficient for oscillation1, coefficient for oscillation2].
+    deltaT : float
+        temporal resolution for the OU process generation.
+    binSize : float
+        bin-size for binning data and computing the autocorrelation.
+    T : float
+        duration of trials.
+    numTrials : float
+        number of trials.
+    data_mean : float
+        mean value of the OU process (average of firing rate). 
+    data_var : float
+        variance of the OU process (variance of firing rate). 
+
+    Returns
+    -------
+    syn_data : nd array
+        array of binned spike-counts (numTrials * int(T/binSize)).
+    numBinData : int
+        number of bins/samples per trial (required for computing autocorrelation).
+
+    """
+    
+    # load params
+    tau = np.array(theta[0])
+    f1 = np.array(theta[1])
+    f2 = np.array(theta[2])
+    coeff1 = np.array(theta[3])
+    coeff2 = np.array(theta[4])
+    
+    # setting params for OU
+    v = 1
+    D = v/tau
+    binsData =  np.arange(0, T + binSize, binSize)
+    binsData_sin = np.arange(0, T, deltaT )
+    numBinData = len(binsData)-1
+
+    # generate OU + oscil
+    ou_all = OU_gen(tau, D, deltaT, T, numTrials)
+    time_mat = np.tile(binsData_sin, (numTrials,1))
+    phases = np.random.rand(numTrials,1)* 2 * np.pi
+    oscil1 = np.sqrt(2)*np.sin(phases + 2*np.pi*0.001*f1* time_mat)
+    phases = np.random.rand(numTrials,1)* 2 * np.pi
+    oscil2 = np.sqrt(2)*np.sin(phases + 2*np.pi*0.001*f2* time_mat)
+    data = np.sqrt(coeff1) * oscil1 + np.sqrt(coeff2) * oscil2 + np.sqrt(1 - coeff1 - coeff2) * ou_all
+    
+    # fit mean and var
+    ou_std = np.sqrt(data_var)
+    data_meanVar = ou_std * data + data_mean
+    
+    # bin rate 
+    syn_data = binData(data_meanVar, [numTrials,numBinData]) * deltaT
+    return syn_data, numBinData
+
+
+
 
 def oneTauOU_poissonSpikes(theta, deltaT, binSize, T, numTrials, data_mean, data_var):
     """Generate a one-timescale process with spike counts sampled from a Gaussian distribution.
@@ -660,5 +722,72 @@ def twoTauOU_gaussianSpikes_withDispersion(theta, deltaT, binSize, T, numTrials,
     # bin rate and generate spikes
     rate_sum = binData(ou_all, [numTrials,numBinData]) * deltaT
     syn_data = gaussian_sp(rate_sum,disp)
+    return syn_data, numBinData
+ 
+    def oneTauOU_oneF(theta, deltaT, binSize, T, numTrials, data_mean, data_var):
+    """Generate a one-timescale OU process augmeneted with an additive 1/f spectrum.
+
+    Parameters
+    -----------
+    theta : 1d array
+        [timescale, 1/f exponent, coefficient for timescale].
+    deltaT : float
+        temporal resolution for the OU process generation.
+    binSize : float
+        bin-size for binning data and computing the autocorrelation.
+    T : float
+        duration of trials.
+    numTrials : float
+        number of trials.
+    data_mean : float
+        mean of the spike counts. 
+    data_var : float
+        variance of the spike counts.
+    
+    Returns
+    -------
+    syn_data : nd array
+        array of binned spike-counts (numTrials * int(T/binSize)).
+    numBinData : int
+        number of bins/samples per trial (required for computing autocorrelation).
+
+    """
+    # load parameters
+    tau = np.array(theta[0])
+    expon = np.array(theta[1]) 
+    coeff = np.array(theta[2])
+
+    # setting params for 1/f
+    fs = T/deltaT
+    fmax = fs/2
+    deltaF = fmax/(fs)
+    # generate 1/f 
+    f_range = np.arange(1,fmax + 1, deltaF)
+    psd = 1/((f_range)**expon)
+    onef = psd_to_timeseries(psd, numTrials)
+    onef = stats.zscore(onef, axis = 1)
+
+
+    # setting params for OU
+    binSize = deltaT
+    v = 1
+    D = v/tau
+    binsData =  np.arange(0, T + binSize, binSize)
+    numBinData = len(binsData)-1
+    # generate OU
+    ou_all = OU_gen(tau,D,deltaT,T,numTrials)
+
+    ou_all = np.sqrt(coeff) * ou_all + np.sqrt(1 - coeff) * onef
+    ou_check = np.max(ou_all)
+    if not np.isfinite(ou_check) or ou_check>10**10: # check for all-nan values
+        return np.zeros((numTrials,numBinData)), numBinData
+
+
+    # fit mean and var
+    ou_std = np.sqrt(data_var)
+    ou_all = ou_std * ou_all + data_mean
+
+    # bin rate 
+    syn_data = binData(ou_all, [numTrials,numBinData]) * deltaT
     return syn_data, numBinData
  
