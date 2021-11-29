@@ -724,7 +724,7 @@ def twoTauOU_gaussianSpikes_withDispersion(theta, deltaT, binSize, T, numTrials,
     syn_data = gaussian_sp(rate_sum,disp)
     return syn_data, numBinData
  
-    def oneTauOU_oneF(theta, deltaT, binSize, T, numTrials, data_mean, data_var):
+def oneTauOU_oneF(theta, deltaT, binSize, T, numTrials, data_mean, data_var):
     """Generate a one-timescale OU process augmeneted with an additive 1/f spectrum.
 
     Parameters

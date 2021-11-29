@@ -4,6 +4,7 @@ Module for extracting statistics from data and running the preprocessing functio
 
 
 import numpy as np
+import matplotlib.pyplot as plt
 from scipy.optimize import curve_fit
 import scipy.stats as stats
 from generative_models import *
@@ -237,7 +238,7 @@ def compute_spikesDisperssion_oneTau(ac_data, theta, deltaT, binSize, T, numTria
 
 
 def check_expEstimates(theta, deltaT, binSize, T, numTrials, data_mean, data_var,\
-                              maxTimeLag, numTimescales, numIter = 500, confidence_level = 0.05):
+                              maxTimeLag, numTimescales, numIter = 500, plot_it = 1):
     """Preprocessing function to check if timescales from exponential fits are reliable for the given data.
     
     Parameters
@@ -263,13 +264,17 @@ def check_expEstimates(theta, deltaT, binSize, T, numTrials, data_mean, data_var
         number of timescales to fit
     numIter: float, default 500
         number iterations to generate synthetic data and fit with exponentials
-    confidence_level: float, default 0.05
-        confidence level to check for the significant differences between fitted and original timescales
+    plot_it: boolean
+        if plot the distributions.
 
     Returns
     -------
-    taus_all : nd array
-        array of estimated timescales from exponential fits.
+    taus_bs : nd array
+        array of estimated timescales from parametric bootstrapping.
+    taus_bs_corr: nd array
+        array of bootstrap-corrected timescales from exponential fits.
+    err: nd array
+        Bootstrap-error for each timescale
     
     """
     if numTimescales > 2:
@@ -291,21 +296,55 @@ def check_expEstimates(theta, deltaT, binSize, T, numTrials, data_mean, data_var
             taus = np.sort(popt[1:3])
             tau1_exp.append(taus[0])
             tau2_exp.append(taus[1])
-        taus_all = np.array([tau1_exp, tau2_exp])
+        taus_bs = np.array([tau1_exp, tau2_exp])
+        
+        # compute the bootstrap error and do bias correction
+        tau1_bs_corr = tau1_exp + 2*(theta[0] - np.mean(tau1_exp))
+        x1 = np.mean(tau1_exp) 
+        x2 = theta[0]   
+        err1 = int(((x2-x1)/x1)*100)
+        tau2_bs_corr = tau2_exp + 2*(theta[1] - np.mean(tau2_exp))
+        x1 = np.mean(tau2_exp) 
+        x2 = theta[1]   
+        err2 = int(((x2-x1)/x1)*100)
+        
+        taus_bs_corr = np.array([tau1_bs_corr, tau2_bs_corr])
+        err = np.array([err1, err2])
+        
+        print('first timescale: ', str(err1)+ '% bootstrap-error')
+        print('second timescale: ', str(err2)+ '% bootstrap-error')
+        print('The true errors from the ground truths can be larger')
+        
+        
+        if plot_it:
+            plt.figure(figsize = (20,6))
+            ax = plt.subplot(121)
+            plt.hist(tau1_exp, color = 'm', label = 'Parametric bootstrap',  density = True)    
+            plt.hist(tau1_bs_corr, ec = 'm', fc = 'w',label = 'Bootstrap bias-corrected', density = True)
+            plt.axvline(theta[0], color = 'c', label = 'Direct fit')                        
+            
+            plt.xlabel('Timescale')
+            plt.ylabel('Probability density')
+            
+            ax.spines['right'].set_visible(False)
+            ax.spines['top'].set_visible(False)
+            ax.yaxis.set_ticks_position('left')
+            ax.xaxis.set_ticks_position('bottom')  
+            
+            
+            ax = plt.subplot(122)
+            plt.hist(tau2_exp, color = 'm', label = 'Parametric bootstrap',  density = True)    
+            plt.hist(tau2_bs_corr, ec = 'm', fc = 'w',label = 'Bootstrap bias-corrected', density = True)
+            plt.axvline(theta[1], color = 'c', label = 'Direct fit')                        
+            
+            plt.xlabel('Timescale')
+            plt.legend(frameon = False, loc = 'upper right', bbox_to_anchor=(1.7,.95), handlelength= 0.7, handletextpad=0.3)
 
-        # check if timescales are within confidence range
-        percent = confidence_level *100
-        lower_bound = np.percentile(tau2_exp, percent)
-        upper_bound = np.percentile(tau2_exp, 100- percent)
-        good_exp_tau2 = (theta[1] < lower_bound) & (theta[1] > upper_bound)
-        if not good_exp_tau2:
-            print('Estimates for tau2 are significantly biased!')
+            ax.spines['right'].set_visible(False)
+            ax.spines['top'].set_visible(False)
+            ax.yaxis.set_ticks_position('left')
+            ax.xaxis.set_ticks_position('bottom')  
 
-        lower_bound = np.percentile(tau1_exp, percent)
-        upper_bound = np.percentile(tau1_exp, 100- percent)
-        good_exp_tau1 = (theta[0] < lower_bound) & (theta[0] > upper_bound)
-        if not good_exp_tau1:
-            print('Estimates for tau1 are significantly biased!')
 
 
     if numTimescales == 1:
@@ -321,16 +360,31 @@ def check_expEstimates(theta, deltaT, binSize, T, numTrials, data_mean, data_var
             ydata = ac_syn
             popt, pcov = curve_fit(single_exp, xdata, ydata, maxfev = 2000)
             tau_exp.append(popt[1])
-        taus_all = np.array(tau_exp)
-        # check if timescales are within confidence range
-        percent = confidence_level *100
-        lower_bound = np.percentile(tau_exp, percent)
-        upper_bound = np.percentile(tau_exp, 100- percent)
-        good_exp_tau = (theta[0] < lower_bound) & (theta[0] > upper_bound)
-        if not good_exp_tau:
-            print('Estimates for tau are significantly biased!')
+        taus_bs = np.array(tau_exp)
+        taus_bs_corr = taus_bs + 2*(theta[0] - np.mean(taus_bs))
+        x1 = np.mean(taus_bs) 
+        x2 = theta[0]   
+        err = int(((x2-x1)/x1)*100)
+        print(str(err)+ '% bootstrap-error')
+        print('The true error from the ground truth can be larger')
 
-    return taus_all
+        if plot_it:
+            plt.figure(figsize = (9,5))
+            ax = plt.subplot(111)
+            plt.hist(taus_bs, color = 'm', label = 'Parametric bootstrap',  density = True)    
+            plt.hist(taus_bs_corr, ec = 'm', fc = 'w',label = 'Bootstrap bias-corrected', density = True)
+            plt.axvline(theta[0], color = 'c', label = 'Direct fit')                        
+            
+            plt.xlabel('Timescale')
+            plt.ylabel('Probability density')
+            plt.legend(frameon = False, loc = 'upper right', bbox_to_anchor=(1.6,.95), handlelength= 0.7, handletextpad=0.3)
+
+            ax.spines['right'].set_visible(False)
+            ax.spines['top'].set_visible(False)
+            ax.yaxis.set_ticks_position('left')
+            ax.xaxis.set_ticks_position('bottom')   
+
+    return taus_bs, taus_bs_corr, err
 
 
 
