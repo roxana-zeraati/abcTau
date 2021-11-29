@@ -274,7 +274,7 @@ def check_expEstimates(theta, deltaT, binSize, T, numTrials, data_mean, data_var
     taus_bs_corr: nd array
         array of bootstrap-corrected timescales from exponential fits.
     err: nd array
-        Bootstrap-error for each timescale
+        Bootstrap-error for each timescale (in percentage)
     
     """
     if numTimescales > 2:
