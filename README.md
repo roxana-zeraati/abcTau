@@ -40,7 +40,6 @@ import sys
 sys.path.append('./abcTau')
 ```
 You can see the working examples in the Jupyter Notebook Tutorials 1 and 2. Typical time for installation (i.e. cloning the repository) is less 10 sec.
-For the final version of the package we will provide the "pip install" option.
 
 
 ## Development
