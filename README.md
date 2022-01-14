@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5842025.svg)](https://doi.org/10.5281/zenodo.5842025)
+
 ## abcTau
 
 abcTau is a Python package for unbiased estimation of timescales from autocorrelations or power spectrums using adaptive Approximate Bayesian Computations (aABC). This method overcomes the statistical bias in autocorrelations of finite data samples, which undermines the accuracy of conventional methods based on direct fitting of the autocorrelation with exponential decay  functions.  abcTau overcomes the bias by fitting the sample autocorrelation or power spectrum with a generative model based on a mixture of Ornstein-Uhlenbeck (OU) processes. This way it accounts for finite sample size and noise in data and returns a posterior distribution of timescales, that quantifies the uncertainty of estimates and can be used to compare alternative hypotheses about the dynamics of the underlying process. This method can be applied to any time-series data such as spike-counts in neuroscience.
@@ -42,7 +44,6 @@ import sys
 sys.path.append('./abcTau')
 ```
 You can see the working examples in the Jupyter Notebook Tutorials 1 and 2. Typical time for installation (i.e. cloning the repository) is less 10 sec.
-For the final version of the package we will provide the "pip install" option.
 
 
 ## Development
