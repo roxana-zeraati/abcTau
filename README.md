@@ -63,7 +63,7 @@ Ordered from fastest to slowest fitting:
 - twoTauOU: two-timescale OU process 
 - oneTauOU_oscil: one-timescale OU process with an additive oscillation
 - oneTauOU_twooscil: one-timescale OU process with two additive oscillations
-- oneTauOU_oneF: one-timescale OU process agumented with a 1/f background process (with variable exponent), in this function 1/f PSD can be replaced with any arbitrary PSD shape
+- oneTauOU_oneF: one-timescale OU process augmented with a 1/f background process (with variable exponent), in this function 1/f PSD can be replaced with any arbitrary PSD shape
 - oneTauOU_poissonSpikes: one-timescale inhomogeneous Poisson process
 - oneTauOU_gammaSpikes: one-timescale spiking process with gamma-distributed spike-counts and predefined dispersion
 - oneTauOU_gaussianSpikes: one-timescale spiking process with Gaussian-distributed spike-counts and predefined dispersion
