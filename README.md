@@ -3,7 +3,7 @@
 
 ## abcTau
 
-abcTau is a Python package for unbiased estimation of timescales from autocorrelations or power spectrums using adaptive Approximate Bayesian Computations (aABC). This method overcomes the statistical bias in autocorrelations of finite data samples, which undermines the accuracy of conventional methods based on direct fitting of the autocorrelation with exponential decay  functions.  abcTau overcomes the bias by fitting the sample autocorrelation or power spectrum with a generative model based on a mixture of Ornstein-Uhlenbeck (OU) processes. This way it accounts for finite sample size and noise in data and returns a posterior distribution of timescales, that quantifies the uncertainty of estimates and can be used to compare alternative hypotheses about the dynamics of the underlying process. This method can be applied to any time-series data such as spike-counts in neuroscience.
+abcTau is a Python package for unbiased estimation of timescales from autocorrelations or power spectrums using adaptive Approximate Bayesian Computations (aABC). This method overcomes the statistical bias in autocorrelations of finite data samples, which undermines the accuracy of conventional methods based on direct fitting of the autocorrelation with exponential decay functions.  abcTau overcomes the bias by fitting the sample autocorrelation or power spectrum with a generative model based on a mixture of Ornstein-Uhlenbeck (OU) processes. This way it accounts for finite sample size and noise in data and returns a posterior distribution of timescales, that quantifies the uncertainty of estimates and can be used to compare alternative hypotheses about the dynamics of the underlying process. This method can be applied to any time-series data such as spike counts in neuroscience.
 
 The details of the method are explained in:  
 Zeraati, R., Engel, T. A. & Levina, A. A flexible Bayesian framework for unbiased estimation of timescales. bioRxiv 2020.08.11.245944 (2021). https://www.biorxiv.org/content/10.1101/2020.08.11.245944v2  
@@ -44,11 +44,11 @@ and add the package path manually to your Python script or Jupyter Notebook:
 import sys
 sys.path.append('./abcTau')
 ```
-You can see the working examples in the Jupyter Notebook Tutorials 1 and 2. Typical time for installation (i.e. cloning the repository) is less than 10 sec.
+You can see the working examples in the Jupyter Notebook Tutorials 1 and 2. The typical time for installation (i.e. cloning the repository) is less than 10 sec.
 
 
 ## Development
-The object oriented implementation of the package allows users to easily replace any function, including generative models, summary statistic computations, distance functions, etc., with their customized functions to better describe statistics of their data. You can send us your customized generative models to be added directly to the package and create a larger database of generative models available for different applications (contact: research@roxanazeraati.org)
+The object-oriented implementation of the package allows users to easily replace any function, including generative models, summary statistic computations, distance functions, etc., with their customized functions to better describe the statistics of their data. You can send us your customized generative models to be added directly to the package and create a larger database of generative models available for different applications (contact: research@roxanazeraati.org)
 
 
 ### List of available summary statistics (check "summary_stats.py" for details):
@@ -64,17 +64,16 @@ Ordered from fastest to slowest fitting:
 - oneTauOU_oscil: one-timescale OU process with an additive oscillation
 - oneTauOU_twooscil: one-timescale OU process with two additive oscillations
 - oneTauOU_oneF: one-timescale OU process agumented with a 1/f background process (with variable exponent), in this function 1/f PSD can be replaced with any arbitrary PSD shape
-- oneTauOU_poissonSpikes: one-timescale inhomogenous Poisson process
-- oneTauOU_gammaSpikes: one-timescale spiking process with gamma distributed spike-counts and predefined dispersion
-- oneTauOU_gaussianSpikes: one-timescale spiking process with Gaussian distributed spike-counts and predefined dispersion
-- twoTauOU_poissonSpikes: two-timescale inhomogenous Poisson process
-- twoTauOU_gammaSpikes: two-timescale spiking process with gamma distributed spike-counts and predefined dispersion
-- twoTauOU_gaussianSpikes: two-timescale spiking process with Gaussian distributed spike-counts and predefined dispersion
-- twoTauOU_gammaSpikes_withDispersion: two-timescale spiking process with gamma distributed spike-counts
-- twoTauOU_gaussianSpikes_withDispersion: two-timescale spiking process with Gaussian distributed spike-counts
+- oneTauOU_poissonSpikes: one-timescale inhomogeneous Poisson process
+- oneTauOU_gammaSpikes: one-timescale spiking process with gamma-distributed spike-counts and predefined dispersion
+- oneTauOU_gaussianSpikes: one-timescale spiking process with Gaussian-distributed spike-counts and predefined dispersion
+- twoTauOU_poissonSpikes: two-timescale inhomogeneous Poisson process
+- twoTauOU_gammaSpikes: two-timescale spiking process with gamma-distributed spike-counts and predefined dispersion
+- twoTauOU_gaussianSpikes: two-timescale spiking process with Gaussian-distributed spike-counts and predefined dispersion
+- twoTauOU_gammaSpikes_withDispersion: two-timescale spiking process with gamma-distributed spike-counts
+- twoTauOU_gaussianSpikes_withDispersion: two-timescale spiking process with Gaussian-distributed spike-counts
 
 
 ### List of available distance functions (check "distance_functions.py" for details):
 - linear_distance
 - logarithmic_distance
-
