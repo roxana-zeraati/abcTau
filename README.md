@@ -23,7 +23,7 @@ Robert C. Morehead and Alex Hagen. A Python package for Approximate Bayesian Com
 
 
 ## Operating system
-- macOs
+- macOS
 - Windows
 - Linux
 
