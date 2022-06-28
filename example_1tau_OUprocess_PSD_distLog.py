@@ -41,7 +41,7 @@ ifNorm = True # if normalize the autocorrelation or PSD
 deltaT = 1 # temporal resolution of data.
 binSize = 1 #  bin-size for binning data and computing the autocorrelation.
 disp = None # put the disperssion parameter if computed with grid-search
-maxTimeLag = None # only used when suing autocorrelation for summary statistics
+maxTimeLag = None # only used when using autocorrelation for summary statistics
 data_sumStat, data_mean, data_var, T, numTrials =  abcTau.preprocessing.extract_stats(data_load, deltaT, binSize,\
                                                                                   summStat_metric, ifNorm, maxTimeLag)
 
