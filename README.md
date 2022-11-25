@@ -16,10 +16,10 @@ Jupyter Notebooks that reproduce the paper figures are available in the "paper_f
 
 
 For a recent application of this method see:   
-Zeraati, R., Shi, Y., Steinmetz, N. A., Gieselmann, M. A., Thiele, A., Moore, T., Levina, A. & Engel, T. A. Attentional modulation of intrinsic timescales in visual cortex and spatial networks. bioRxiv 2021.05.17.444537 (2021). https://www.biorxiv.org/content/10.1101/2021.05.17.444537v1
+Zeraati, R., Shi, Y., Steinmetz, N. A., Gieselmann, M. A., Thiele, A., Moore, T., Levina, A. & Engel, T. A. (2022). Intrinsic timescales in the visual cortex change with selective attention and reflect spatial connectivity. bioRxiv 2021.05.17.444537. https://www.biorxiv.org/content/10.1101/2021.05.17.444537v2.
 
 
-The basis of aABC algorithm in this package is adopted from a previous implementation (originally developed in Python 2):
+The basis of aABC algorithm in this package is adapted from a previous implementation (originally developed in Python 2):
 Robert C. Morehead and Alex Hagen. A Python package for Approximate Bayesian Computation (2014). https://github.com/rcmorehead/simpleabc. 
 
 
