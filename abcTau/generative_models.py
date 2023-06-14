@@ -426,7 +426,7 @@ def oneTauOU_gaussianSpikes(theta, deltaT, binSize, T, numTrials, data_mean, dat
 
 
 def oneTauOU_gammaSpikes_withDispersion(theta, deltaT, binSize, T, numTrials, data_mean, data_var): 
-    """Generate a two-timescales process with spike counts sampled from a Gamma distribution.
+    """Generate a one-timescale process with spike counts sampled from a Gamma distribution.
     disperssion parameter (fano factor) of spike generation function is fitted with ABC.
 
     Parameters
@@ -485,7 +485,7 @@ def oneTauOU_gammaSpikes_withDispersion(theta, deltaT, binSize, T, numTrials, da
 
 
 def oneTauOU_gaussianSpikes_withDispersion(theta, deltaT, binSize, T, numTrials, data_mean, data_var): 
-    """Generate a two-timescales process with spike counts sampled from a Gamma distribution.
+    """Generate a one-timescale process with spike counts sampled from a Gamma distribution.
     disperssion parameter (fano factor) of spike generation function is fitted with ABC.
 
     Parameters
