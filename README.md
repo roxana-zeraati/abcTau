@@ -9,10 +9,10 @@ The details of the method are explained in:
 Zeraati, R., Engel, T. A., & Levina, A. (2022). A flexible Bayesian framework for unbiased estimation of timescales. Nature Computational Science, 2(3), 193-204. https://www.nature.com/articles/s43588-022-00214-3  
 Please cite this paper (and if you can also the package DOI provided in the badge above) when you use this package for a scientific publication.
 
-You can find Demos on how to use abcTau for estimating timescales and performing Bayesian model comparison in the  Jupyter Notebook Tutorials 1 (fitting) and 2 (visualization and model comparison). These tutorials contain examples already used in figures 1, 3 and 5 of the preprint above. The example data to test the package are available in 'example_data' folder. The example outputs are available in 'example_abc_results' and 'example_modelComparison'. Three example python scripts are also available for running the package on a cluster with parallel processing. You can use the 'check_expEstimates' function from the 'preprocessing' module to check the bias in timescales estimated from exponential fits on your data.
+You can find Demos on how to use abcTau for estimating timescales and performing Bayesian model comparison in the  Jupyter Notebook Tutorials 1 (fitting) and 2 (visualization and model comparison). These tutorials contain examples already used in figures 1, 3 and 5 of the preprint above. The example data to test the package are available in `example_data` folder. The example outputs are available in `example_abc_results` and `example_modelComparison`. Three example python scripts are also available for running the package on a cluster with parallel processing. You can use the `check_expEstimates` function from the `preprocessing` module to check the bias in timescales estimated from exponential fits on your data.
 
 
-Jupyter Notebooks that reproduce the paper figures are available in the 'paper_figures_notebooks' folder.
+Jupyter Notebooks that reproduce the paper figures are available in the `paper_figures_notebooks` folder.
 
 
 For a recent application of this method see:   
@@ -52,14 +52,14 @@ You can see the working examples in the Jupyter Notebook Tutorials 1 and 2. The 
 The object-oriented implementation of the package allows users to easily replace any function, including generative models, summary statistic computations, distance functions, etc., with their customized functions to better describe the statistics of their data. You can send us your customized generative models to be added directly to the package and create a larger database of generative models available for different applications (contact: research@roxanazeraati.org)
 
 
-### List of available summary statistics (check 'summary_stats.py' for details):
+### List of available summary statistics (check `summary_stats.py` for details):
 Ordered from fastest to slowest fitting:
 - comp_psd: computing the power spectral density
 - comp_ac_fft: computing autocorrelation using FFT to speed up (more biased for direct fitting) 
 - comp_cc: computing autocorrelation in the time domain (less biased for direct fitting)
 
 
-### List of available generative models (check 'generative_models.py' for details):
+### List of available generative models (check `generative_models.py` for details):
 - oneTauOU: one-timescale OU process 
 - twoTauOU: two-timescale OU process 
 - oneTauOU_oscil: one-timescale OU process with an additive oscillation
@@ -77,6 +77,6 @@ Ordered from fastest to slowest fitting:
 - twoTauOU_gaussianSpikes_withDispersion: two-timescale spiking process with Gaussian-distributed spike-counts
 
 
-### List of available distance functions (check 'distance_functions.py' for details):
+### List of available distance functions (check `distance_functions.py` for details):
 - linear_distance
 - logarithmic_distance
