@@ -68,6 +68,8 @@ Ordered from fastest to slowest fitting:
 - oneTauOU_poissonSpikes: one-timescale inhomogeneous Poisson process
 - oneTauOU_gammaSpikes: one-timescale spiking process with gamma-distributed spike-counts and predefined dispersion
 - oneTauOU_gaussianSpikes: one-timescale spiking process with Gaussian-distributed spike-counts and predefined dispersion
+- oneTauOU_gammaSpikes_withDispersion: one-timescale spiking process with gamma-distributed spike-counts
+- oneTauOU_gaussianSpikes_withDispersion: one-timescale spiking process with Gaussian-distributed spike-counts
 - twoTauOU_poissonSpikes: two-timescale inhomogeneous Poisson process
 - twoTauOU_gammaSpikes: two-timescale spiking process with gamma-distributed spike-counts and predefined dispersion
 - twoTauOU_gaussianSpikes: two-timescale spiking process with Gaussian-distributed spike-counts and predefined dispersion
