@@ -26,7 +26,7 @@ def extract_stats(data, deltaT, binSize, summStat_metric, ifNorm, maxTimeLag = N
     deltaT : float
         temporal resolution of data (or binSize of spike counts).
     binSize : float
-        bin-size for computing the autocorrelation.    
+        bin-size for computing the autocorrelation. It should be a multiple of deltaT.    
     summStat : string
         metric for computing summay statistics ('comp_cc', 'comp_ac_fft', 'comp_psd').
     ifNorm : string
@@ -58,18 +58,24 @@ def extract_stats(data, deltaT, binSize, summStat_metric, ifNorm, maxTimeLag = N
     numTrials, numTimePoints = np.shape(data)
     T = numTimePoints* deltaT
 
-    # compute mean and variance for one unit of time (1 s or 1 ms)
-    bin_var = 1
-    binsData_var =  np.arange(0, T + bin_var, bin_var)
-    numBinData_var = len(binsData_var)-1
-    binned_data_var = binData(data, [numTrials,numBinData_var]) * deltaT
-    data_mean = np.mean(binned_data_var)/bin_var
-    data_var = comp_cc(binned_data_var, binned_data_var, 1, bin_var, numBinData_var)[0]
+
     
     # bin data
     binsData =  np.arange(0, T + binSize, binSize)
     numBinData = len(binsData)-1
     binned_data = binData(data, [numTrials,numBinData]) * deltaT
+    
+    # compute mean and variance 
+    data_mean = np.mean(binned_data)
+    data_var = comp_cc(binned_data, binned_data, 1, binSize, numBinData)[0]
+    
+#     older version, had problems when deltaT>1
+#     bin_var = 1
+#     binsData_var =  np.arange(0, T + bin_var, bin_var)
+#     numBinData_var = len(binsData_var)-1
+#     binned_data_var = binData(data, [numTrials,numBinData_var]) * deltaT
+#     data_mean = np.mean(binned_data_var)/bin_var
+#     data_var = comp_cc(binned_data_var, binned_data_var, 1, bin_var, numBinData_var)[0]
     
     sumStat = comp_sumStat(binned_data, summStat_metric, ifNorm, deltaT, binSize, T, numBinData, maxTimeLag)
     
