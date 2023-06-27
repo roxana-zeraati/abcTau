@@ -40,9 +40,9 @@ def extract_stats(data, deltaT, binSize, summStat_metric, ifNorm, maxTimeLag = N
     sumStat_nonNorm : 1d array
         non normalized autocorrelation or PSD depending on chosen summary statistics.
     data_mean : float
-        mean of data (for one unit of time)
+        mean of data (computed in the unit of binSize)
     data_mean : float
-        variance of data (for one unit of time)
+        variance of data (computed in the unit of binSize)
     T : float
         duration of each trial in data
     numTrials : float

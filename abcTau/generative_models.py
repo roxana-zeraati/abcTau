@@ -313,17 +313,17 @@ def oneTauOU_gammaSpikes(theta, deltaT, binSize, T, numTrials, data_mean, data_v
     theta : 1d array
         [timescale].
     deltaT : float
-        temporal resolution for the OU process generation.
+        temporal resolution for the OU process generation. deltaT <= binSize.
     binSize : float
-        bin-size for binning data and computing the autocorrelation.
+        bin-size for binning data and computing the autocorrelation (should be the same as observed data and a multiple of deltaT).  
     T : float
         duration of trials.
     numTrials : float
         number of trials.
     data_mean : float
-        mean of the spike counts. 
+        mean of the spike counts, e.g., is computed from spike counts in the unit of binSize. 
     data_var : float
-        variance of the spike counts.
+        variance of the spike counts, e.g., is computed from spike counts in the unit of binSize. 
     disp : float
         disperssion parameter (fano factor) of spike generation function.
 
@@ -342,8 +342,8 @@ def oneTauOU_gammaSpikes(theta, deltaT, binSize, T, numTrials, data_mean, data_v
     v = 1
     D = v/tau
     
-    ou_std =  np.sqrt(data_var - disp*data_mean)/deltaT# law of total variance   
-    ou_mean = data_mean/deltaT # law of total expectation
+    ou_std =  np.sqrt(data_var - disp*data_mean)/binSize# law of total variance   
+    ou_mean = data_mean/binSize # law of total expectation
     binsData =  np.arange(0, T + binSize, binSize)
     numBinData = len(binsData)-1
     
@@ -373,17 +373,17 @@ def oneTauOU_gaussianSpikes(theta, deltaT, binSize, T, numTrials, data_mean, dat
     theta : 1d array
         [timescale].
     deltaT : float
-        temporal resolution for the OU process generation.
+        temporal resolution for the OU process generation. deltaT <= binSize.
     binSize : float
-        bin-size for binning data and computing the autocorrelation.
+        bin-size for binning data and computing the autocorrelation (should be the same as observed data and a multiple of deltaT).  
     T : float
         duration of trials.
     numTrials : float
         number of trials.
     data_mean : float
-        mean of the spike counts. 
+        mean of the spike counts, e.g., is computed from spike counts in the unit of binSize. 
     data_var : float
-        variance of the spike counts.
+        variance of the spike counts, e.g., is computed from spike counts in the unit of binSize. 
     disp : float
         disperssion parameter (fano factor) of spike generation function.
 
@@ -402,8 +402,8 @@ def oneTauOU_gaussianSpikes(theta, deltaT, binSize, T, numTrials, data_mean, dat
     v = 1
     D = v/tau
     
-    ou_std =  np.sqrt(data_var - disp*data_mean)/deltaT# law of total variance
-    ou_mean = data_mean/deltaT # law of total expectation
+    ou_std =  np.sqrt(data_var - disp*data_mean)/binSize# law of total variance
+    ou_mean = data_mean/binSize # law of total expectation
     binsData =  np.arange(0, T + binSize, binSize)
     numBinData = len(binsData)-1
     
@@ -434,17 +434,17 @@ def oneTauOU_gammaSpikes_withDispersion(theta, deltaT, binSize, T, numTrials, da
     theta : 1d array
         [timescale1, disperssion_parameter].
     deltaT : float
-        temporal resolution for the OU process generation.
+        temporal resolution for the OU process generation. deltaT <= binSize.
     binSize : float
-        bin-size for binning data and computing the autocorrelation.
+        bin-size for binning data and computing the autocorrelation (should be the same as observed data and a multiple of deltaT).  
     T : float
         duration of trials.
     numTrials : float
         number of trials.
     data_mean : float
-        mean of the spike counts. 
+        mean of the spike counts, e.g., is computed from spike counts in the unit of binSize. 
     data_var : float
-        variance of the spike counts.
+        variance of the spike counts, e.g., is computed from spike counts in the unit of binSize. 
     
     Returns
     -------
@@ -463,8 +463,8 @@ def oneTauOU_gammaSpikes_withDispersion(theta, deltaT, binSize, T, numTrials, da
     v = 1
     D1 = v/tau1
     D2 = v/tau2
-    ou_std =  np.sqrt(data_var - disp*data_mean)/deltaT # law of total variance 
-    ou_mean = data_mean/deltaT # law of total expectation
+    ou_std =  np.sqrt(data_var - disp*data_mean)/binSize # law of total variance 
+    ou_mean = data_mean/binSize # law of total expectation
     binsData =  np.arange(0, T + binSize, binSize)
     numBinData = len(binsData)-1
     
@@ -493,17 +493,17 @@ def oneTauOU_gaussianSpikes_withDispersion(theta, deltaT, binSize, T, numTrials,
     theta : 1d array
         [timescale1, disperssion_parameter].
     deltaT : float
-        temporal resolution for the OU process generation.
+        temporal resolution for the OU process generation. deltaT <= binSize.
     binSize : float
-        bin-size for binning data and computing the autocorrelation.
+        bin-size for binning data and computing the autocorrelation (should be the same as observed data and a multiple of deltaT).  
     T : float
         duration of trials.
     numTrials : float
         number of trials.
     data_mean : float
-        mean of the spike counts. 
+        mean of the spike counts, e.g., is computed from spike counts in the unit of binSize. 
     data_var : float
-        variance of the spike counts.
+        variance of the spike counts, e.g., is computed from spike counts in the unit of binSize. 
     
     Returns
     -------
@@ -522,8 +522,8 @@ def oneTauOU_gaussianSpikes_withDispersion(theta, deltaT, binSize, T, numTrials,
     v = 1
     D1 = v/tau1
     D2 = v/tau2
-    ou_std =  np.sqrt(data_var - disp*data_mean)/deltaT # law of total variance  
-    ou_mean = data_mean//deltaT # law of total expectation 
+    ou_std =  np.sqrt(data_var - disp*data_mean)/binSize # law of total variance  
+    ou_mean = data_mean//binSize # law of total expectation 
     binsData =  np.arange(0, T + binSize, binSize)
     numBinData = len(binsData)-1
     
@@ -551,17 +551,17 @@ def twoTauOU_poissonSpikes(theta, deltaT, binSize, T, numTrials, data_mean, data
     theta : 1d array
         [timescale1, timescale2, coefficient for timescale1].
     deltaT : float
-        temporal resolution for the OU process generation.
+        temporal resolution for the OU process generation. deltaT <= binSize.
     binSize : float
-        bin-size for binning data and computing the autocorrelation.
+        bin-size for binning data and computing the autocorrelation (should be the same as observed data and a multiple of deltaT).  
     T : float
         duration of trials.
     numTrials : float
         number of trials.
     data_mean : float
-        mean of the spike counts. 
+        mean of the spike counts, e.g., is computed from spike counts in the unit of binSize. 
     data_var : float
-        variance of the spike counts. 
+        variance of the spike counts, e.g., is computed from spike counts in the unit of binSize. 
 
     Returns
     -------
@@ -580,8 +580,8 @@ def twoTauOU_poissonSpikes(theta, deltaT, binSize, T, numTrials, data_mean, data
     v = 1
     D1 = v/tau1
     D2 = v/tau2
-    ou_std =  np.sqrt(data_var - data_mean)/deltaT# law of total variance  
-    ou_mean = data_mean/deltaT # law of total expectation
+    ou_std =  np.sqrt(data_var - data_mean)/binSize# law of total variance  
+    ou_mean = data_mean/binSize # law of total expectation
     binsData =  np.arange(0, T + binSize, binSize)
     numBinData = len(binsData)-1
     
@@ -612,17 +612,17 @@ def twoTauOU_gammaSpikes(theta, deltaT, binSize, T, numTrials, data_mean, data_v
     theta : 1d array
         [timescale1, timescale2, coefficient for timescale1].
     deltaT : float
-        temporal resolution for the OU process generation.
+        temporal resolution for the OU process generation. deltaT <= binSize.
     binSize : float
-        bin-size for binning data and computing the autocorrelation.
+        bin-size for binning data and computing the autocorrelation (should be the same as observed data and a multiple of deltaT).  
     T : float
         duration of trials.
     numTrials : float
         number of trials.
     data_mean : float
-        mean of the spike counts. 
+        mean of the spike counts, e.g., is computed from spike counts in the unit of binSize. 
     data_var : float
-        variance of the spike counts.
+        variance of the spike counts, e.g., is computed from spike counts in the unit of binSize. 
     disp : float
         disperssion parameter (fano factor) of spike generation function.
 
@@ -643,8 +643,8 @@ def twoTauOU_gammaSpikes(theta, deltaT, binSize, T, numTrials, data_mean, data_v
     v = 1
     D1 = v/tau1
     D2 = v/tau2
-    ou_std =  np.sqrt(data_var - disp*data_mean)/deltaT# law of total variance  
-    ou_mean = data_mean/deltaT # law of total expectation
+    ou_std =  np.sqrt(data_var - disp*data_mean)/binSize# law of total variance  
+    ou_mean = data_mean/binSize # law of total expectation
     binsData =  np.arange(0, T + binSize, binSize)
     numBinData = len(binsData)-1
     
@@ -675,17 +675,17 @@ def twoTauOU_gaussianSpikes(theta, deltaT, binSize, T, numTrials, data_mean, dat
     theta : 1d array
         [timescale1, timescale2, coefficient for timescale1].
     deltaT : float
-        temporal resolution for the OU process generation.
+        temporal resolution for the OU process generation. deltaT <= binSize.
     binSize : float
-        bin-size for binning data and computing the autocorrelation.
+        bin-size for binning data and computing the autocorrelation (should be the same as observed data and a multiple of deltaT).  
     T : float
         duration of trials.
     numTrials : float
         number of trials.
     data_mean : float
-        mean of the spike counts. 
+        mean of the spike counts, e.g., is computed from spike counts in the unit of binSize. 
     data_var : float
-        variance of the spike counts.
+        variance of the spike counts, e.g., is computed from spike counts in the unit of binSize. 
     disp : float
         disperssion parameter (fano factor) of spike generation function.
 
@@ -706,8 +706,8 @@ def twoTauOU_gaussianSpikes(theta, deltaT, binSize, T, numTrials, data_mean, dat
     v = 1
     D1 = v/tau1
     D2 = v/tau2
-    ou_std =  np.sqrt(data_var - disp*data_mean)/deltaT# law of total variance  
-    ou_mean = data_mean/deltaT # law of total expectation
+    ou_std =  np.sqrt(data_var - disp*data_mean)/binSize# law of total variance  
+    ou_mean = data_mean/binSize # law of total expectation
     binsData =  np.arange(0, T + binSize, binSize)
     numBinData = len(binsData)-1
     
@@ -739,17 +739,17 @@ def twoTauOU_gammaSpikes_withDispersion(theta, deltaT, binSize, T, numTrials, da
     theta : 1d array
         [timescale1, timescale2, coefficient for timescale1, disperssion_parameter].
     deltaT : float
-        temporal resolution for the OU process generation.
+        temporal resolution for the OU process generation. deltaT <= binSize.
     binSize : float
-        bin-size for binning data and computing the autocorrelation.
+        bin-size for binning data and computing the autocorrelation (should be the same as observed data and a multiple of deltaT).  
     T : float
         duration of trials.
     numTrials : float
         number of trials.
     data_mean : float
-        mean of the spike counts. 
+        mean of the spike counts, e.g., is computed from spike counts in the unit of binSize. 
     data_var : float
-        variance of the spike counts.
+        variance of the spike counts, e.g., is computed from spike counts in the unit of binSize. 
     
     Returns
     -------
@@ -770,8 +770,8 @@ def twoTauOU_gammaSpikes_withDispersion(theta, deltaT, binSize, T, numTrials, da
     v = 1
     D1 = v/tau1
     D2 = v/tau2
-    ou_std =  np.sqrt(data_var - disp*data_mean)/deltaT # law of total variance   
-    ou_mean = data_mean/deltaT # law of total expectation
+    ou_std =  np.sqrt(data_var - disp*data_mean)/binSize # law of total variance   
+    ou_mean = data_mean/binSize # law of total expectation
     binsData =  np.arange(0, T + binSize, binSize)
     numBinData = len(binsData)-1
     
@@ -802,17 +802,17 @@ def twoTauOU_gaussianSpikes_withDispersion(theta, deltaT, binSize, T, numTrials,
     theta : 1d array
         [timescale1, timescale2, coefficient for timescale1, disperssion_parameter].
     deltaT : float
-        temporal resolution for the OU process generation.
+        temporal resolution for the OU process generation. deltaT <= binSize.
     binSize : float
-        bin-size for binning data and computing the autocorrelation.
+        bin-size for binning data and computing the autocorrelation (should be the same as observed data and a multiple of deltaT).  
     T : float
         duration of trials.
     numTrials : float
         number of trials.
     data_mean : float
-        mean of the spike counts. 
+        mean of the spike counts, e.g., is computed from spike counts in the unit of binSize. 
     data_var : float
-        variance of the spike counts.
+        variance of the spike counts, e.g., is computed from spike counts in the unit of binSize. 
     
     Returns
     -------
@@ -833,8 +833,8 @@ def twoTauOU_gaussianSpikes_withDispersion(theta, deltaT, binSize, T, numTrials,
     v = 1
     D1 = v/tau1
     D2 = v/tau2
-    ou_std =  np.sqrt(data_var - disp*data_mean)/deltaT # law of total variance 
-    ou_mean = data_mean/deltaT # law of total expectation
+    ou_std =  np.sqrt(data_var - disp*data_mean)/binSize # law of total variance 
+    ou_mean = data_mean/binSize # law of total expectation
     binsData =  np.arange(0, T + binSize, binSize)
     numBinData = len(binsData)-1
     
@@ -863,7 +863,7 @@ def oneTauOU_oneF(theta, deltaT, binSize, T, numTrials, data_mean, data_var):
     theta : 1d array
         [timescale, 1/f exponent, coefficient for timescale].
     deltaT : float
-        temporal resolution for the OU process generation.
+        temporal resolution for OU process generation.
     binSize : float
         bin-size for binning data and computing the autocorrelation.
     T : float
@@ -871,9 +871,9 @@ def oneTauOU_oneF(theta, deltaT, binSize, T, numTrials, data_mean, data_var):
     numTrials : float
         number of trials.
     data_mean : float
-        mean of the spike counts. 
+        mean value of the OU process (average of firing rate). 
     data_var : float
-        variance of the spike counts.
+        variance of the OU process (variance of firing rate).
     
     Returns
     -------
