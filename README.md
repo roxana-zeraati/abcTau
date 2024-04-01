@@ -16,7 +16,9 @@ Jupyter Notebooks that reproduce the paper figures are available in the `paper_f
 
 
 For a recent application of this method see:   
-Zeraati, R., Shi, Y., Steinmetz, N. A., Gieselmann, M. A., Thiele, A., Moore, T., Levina, A. & Engel, T. A. (2022). Intrinsic timescales in the visual cortex change with selective attention and reflect spatial connectivity. bioRxiv 2021.05.17.444537. https://www.biorxiv.org/content/10.1101/2021.05.17.444537v2.
+Zeraati, R., Shi, Y., Steinmetz, N. A., Gieselmann, M. A., Thiele, A., Moore, T., Levina, A. & Engel, T. A. (2023). Intrinsic timescales in the visual cortex change with selective attention and reflect spatial connectivity. Nature communications, 14(1), 1858. https://doi.org/10.1038/s41467-023-37613-7
+
+
 
 
 The basis of aABC algorithm in this package is adapted from a previous implementation (originally developed in Python 2):
