@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "abcTau"
+authors = [
+    {name = "Roxana Zeraati", email = "roxana.zeraati@uni-teubingen.de"}
+]
+description = "Unbiased estimation of timescales using Approximate Bayesian Computations (aABC)"
+version = "0.0.1"
+readme = "README.md"
+requires-python = ">=3.7.1"
+license = {text = "BSD-3-Clause"}
+dependencies = [
+    "numpy >= 1.15.4",
+    "scipy >= 1.1.0",
+]
