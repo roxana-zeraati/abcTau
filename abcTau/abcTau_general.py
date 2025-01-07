@@ -9,10 +9,7 @@ from distance_functions import *
 from summary_stats import *
 import numpy as np
 from scipy import stats
-
-
-
-
+import warnings
 
 
 
@@ -72,7 +69,7 @@ def fit_withABC(MyModel, data_ac , priorDist, inter_save_direc, inter_filename, 
     # give the model our observed data 
     model.set_data(data_ac)
     data = data_ac
-    np.warnings.filterwarnings('ignore')
+    warnings.filterwarnings('ignore')
 
     # fit the model
     abc_results = pmc_abc(model, data, inter_save_direc, inter_filename, epsilon_0 = epsilon_0,\
