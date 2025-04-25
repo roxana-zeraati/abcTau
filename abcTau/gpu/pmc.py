@@ -23,7 +23,6 @@ def pmc_abc(model):
         d, syn_acf, syn_acf_trials, syn_data = basic_abc(model, pmc_mode=(step > 0))
 
         elapsed = time.time() - start_time
-        step_elapsed = time.time() - step_start
         
         epsilon = np.percentile(model.accepted_d[-1], 75)
         model.epsilon.append(epsilon)
